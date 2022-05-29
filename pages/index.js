@@ -3,7 +3,7 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
+  const [suggestionInput, setTextInput] = useState("");
   const [result, setResult] = useState();
 
   async function onSubmit(event) {
@@ -13,11 +13,11 @@ export default function Home() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ animal: animalInput }),
+      body: JSON.stringify({ suggestion: suggestionInput }),
     });
     const data = await response.json();
     setResult(data.result);
-    setAnimalInput("");
+    setTextInput("");
   }
 
   return (
@@ -27,20 +27,20 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>My Text Generator</h3>
+        <img src="/meme.jpeg" className={styles.icon} />
+        <h3>AI Text Magician</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="suggestion"
+            placeholder="Enter a suggestion or any text stuff here!"
+            value={suggestionInput}
+            onChange={(e) => setTextInput(e.target.value)}
             autoComplete="off"
           />
-          <input type="submit" value="Generate names" />
+          <input type="submit" value="Let's Go!" />
         </form>
-        <div className={styles.result}>{result}</div>
+        <pre className={styles.result}>{result}</pre>
       </main>
     </div>
   );
